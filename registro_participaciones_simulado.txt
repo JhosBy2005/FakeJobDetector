@@ -1,22 +1,3 @@
 ﻿# Registro de Participaciones - FakeJobDetector
 IHC y Tecnologias Moviles - UPC 202610
 
-2026-04-14 Santana: Configurar .gitignore y ajustes del repositorio
-2026-04-20 Santana: Agregar labels ARIA faltantes en elementos interactivos
-2026-04-20 Santana: Agregar atributo lang y charset meta al head
-2026-04-27 Santana: Agregar enlace de saltar al contenido
-2026-04-27 Santana: Notas de verificacion de compatibilidad entre navegadores
-2026-05-04 Jimena: Corregir regex de validacion de salario
-2026-05-05 Darnell: Correcciones en enlaces de navegacion
-2026-05-05 Jimena: Resolver calculo de offset en scroll highlight
-2026-05-05 Mauricio: Breakpoints responsivos para tablets
-2026-05-07 Jimena: Correcccion caso borde input vacio en formulario
-2026-05-11 Mauricio: Ajustes de layout movil en todas las secciones
-2026-05-11 Darnell: Agregar alt text a todas las imagenes
-2026-05-11 Jimena: Eliminar console.log de depuracion
-2026-05-11 Santana: Validacion final pre-push e integridad de archivos
-2026-05-11 Jimena: Revision final de JS y comentarios inline
-2026-05-11 Mauricio: Ajuste de hover y transiciones en tarjetas
-2026-05-12 Jimena: Mejorar timing de mensajes de error en formulario
-2026-05-12 Darnell: Revision semantica final del HTML
-2026-05-12 Jimena: Debounce en input del analizador para rendimiento
