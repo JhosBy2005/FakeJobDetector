@@ -108,3 +108,73 @@
     .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .navlinks a, .icon-btn, .dropdown-button {
       border: 1px solid transparent;
+      background: transparent;
+      color: var(--blue);
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: .92rem;
+      font-weight: 800;
+    }
+    .navlinks a:hover, .icon-btn:hover, .dropdown-button:hover {
+      background: color-mix(in srgb, var(--green) 12%, transparent);
+      border-color: var(--line);
+    }
+    .dropdown { position: relative; }
+    .dropdown-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 210px;
+      display: none;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .dropdown.open .dropdown-menu { display: grid; gap: 4px; }
+    .chevron { font-size: .86rem; }
+
+    section { padding: 74px 0; }
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(42, 157, 143, .24), transparent 34%),
+        radial-gradient(circle at 12% 24%, rgba(230, 57, 70, .12), transparent 30%),
+        linear-gradient(135deg, var(--surface), var(--soft));
+    }
+    .hero-grid, .two-col, .three-col, .cards {
+      display: grid;
+      gap: 26px;
+      align-items: start;
+    }
+    .hero-grid { grid-template-columns: 1.02fr .98fr; align-items: center; }
+    .two-col { grid-template-columns: .9fr 1.1fr; }
+    .three-col { grid-template-columns: repeat(3, 1fr); }
+    .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .section-head { max-width: 780px; margin-bottom: 26px; }
+    .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+    .eyebrow {
+      display: inline-flex;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--blue);
+      font-size: clamp(2.6rem, 6vw, 5.8rem);
+      line-height: .96;
