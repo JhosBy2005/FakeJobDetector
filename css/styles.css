@@ -278,3 +278,123 @@
     .phone {
       width: min(390px, 100%);
       margin: 0 auto;
+      border: 8px solid #0B1F33;
+      border-radius: 34px;
+      background: #0B1F33;
+      box-shadow: 0 28px 60px rgba(26, 54, 93, .26);
+      overflow: hidden;
+    }
+    .phone-screen { background: var(--surface); color: var(--ink); border-radius: 24px; overflow: hidden; }
+    .phone-head { padding: 18px; background: linear-gradient(135deg, #1A365D, #2A9D8F); color: white; }
+    .risk-preview { padding: 18px; }
+    .risk-bar { height: 12px; background: color-mix(in srgb, var(--blue) 12%, transparent); border-radius: 999px; overflow: hidden; }
+    .risk-bar span { display: block; height: 100%; width: 86%; background: linear-gradient(90deg, var(--green), var(--yellow), var(--red)); }
+    .signal-list { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .signal-list li {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--red) 10%, transparent);
+      color: var(--red);
+      font-weight: 800;
+      font-size: .9rem;
+    }
+
+    .form-grid { display: grid; gap: 14px; }
+    label { display: block; margin-bottom: 7px; color: var(--blue); font-weight: 900; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 13px;
+      background: var(--surface);
+      color: var(--ink);
+      outline: none;
+      min-height: 46px;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 18%, transparent);
+    }
+    .inline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .result-box {
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--blue) 5%, var(--surface));
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: white;
+      background: var(--blue);
+      font-size: .78rem;
+      font-weight: 900;
+    }
+    .badge.low { background: var(--green); }
+    .badge.mid { background: var(--yellow); color: #342500; }
+    .badge.high { background: var(--red); }
+    .risk-card {
+      margin-top: 12px;
+      border: 2px solid var(--line);
+      border-left-width: 10px;
+      border-radius: 8px;
+      padding: 14px;
+      background:
+        repeating-linear-gradient(135deg, color-mix(in srgb, var(--blue) 4%, transparent) 0 8px, transparent 8px 16px),
+        var(--surface);
+    }
+    .risk-card.low { border-left-color: var(--green); }
+    .risk-card.mid { border-left-color: var(--yellow); }
+    .risk-card.high { border-left-color: var(--red); }
+    .risk-symbol {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 auto;
+      display: inline-grid;
+      place-items: center;
+      background: var(--blue);
+      color: white;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .risk-symbol.high {
+      background: var(--red);
+      clip-path: polygon(50% 4%, 96% 92%, 4% 92%);
+      padding-top: 9px;
+    }
+    .risk-symbol.mid {
+      background: var(--yellow);
+      color: #342500;
+      transform: rotate(45deg);
+    }
+    .risk-symbol.mid span { transform: rotate(-45deg); }
+    .risk-symbol.low {
+      background: var(--green);
+      border-radius: 50%;
+    }
+    .risk-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .status-note {
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: color-mix(in srgb, var(--yellow) 14%, var(--surface));
+      color: var(--ink);
+      font-weight: 800;
+    }
+    .error-note {
+      margin-top: 10px;
