@@ -128,3 +128,103 @@
       const normalized = text.toLowerCase();
       const signals = [];
       let score = 8;
+      riskyPatterns.forEach(pattern => {
+        if (pattern.words.some(word => normalized.includes(word))) {
+          score += pattern.points;
+          signals.push(pattern.key);
+        }
+      });
+      if (normalized.length < 40) {
+        score += 8;
+        signals.push("informacion insuficiente");
+      }
+      score = Math.min(score, 96);
+      let level = score >= 70 ? "Riesgo alto" : score >= 40 ? "Riesgo medio" : "Riesgo bajo";
+      if (signals.length <= 1 && text.trim().length < 55) level = "Resultado no concluyente";
+      const cls = score >= 70 ? "high" : score >= 40 ? "mid" : "low";
+      return { score, level, cls, signals: [...new Set(signals)] };
+    }
+
+    function renderAnalysis(result, text) {
+      const symbol = result.cls === "high"
+        ? `<span class="risk-symbol high" aria-hidden="true">!</span>`
+        : result.cls === "mid"
+          ? `<span class="risk-symbol mid" aria-hidden="true"><span>?</span></span>`
+          : `<span class="risk-symbol low" aria-hidden="true">OK</span>`;
+      const actionMessage = result.cls === "high"
+        ? "No recomendamos postular a esta oferta hasta verificar empresa, RUC y canal oficial."
+        : result.cls === "mid"
+          ? "Revisa los datos antes de postular y confirma la empresa por fuentes oficiales."
+          : "Puedes continuar con cautela, manteniendo buenas practicas de privacidad.";
+      const signalChips = result.signals.length
+        ? result.signals.map(signal => `<span class="chip danger">${signal}</span>`).join("")
+        : `<span class="chip safe">sin seÃ±ales crÃ­ticas</span>`;
+      const recommended = recommendations.slice(0, result.score >= 70 ? 5 : 3)
+        .map(item => `<li>${item}</li>`).join("");
+      qs("#analysisResult").innerHTML = `
+        <span class="badge ${result.cls}">${result.level}: ${result.score}%</span>
+        <div class="risk-card ${result.cls}">
+          <div class="risk-title">${symbol}<span>${result.level}</span></div>
+          <p><strong>Accion sugerida:</strong> ${actionMessage}</p>
+          <p class="muted">Este resultado usa etiqueta, texto, icono, borde y patron visual para no depender solo del color.</p>
+        </div>
+        <div class="chips">${signalChips}</div>
+        <p><strong>Explicacion:</strong> El sistema encontro ${result.signals.length || "pocas"} seÃ±ales de riesgo asociadas a fraude laboral, phishing o manipulacion.</p>
+        <ul>${recommended}</ul>
+        <div class="actions">
+          <button class="btn secondary small" type="button" id="saveAnalysis">Guardar historial</button>
+          <button class="btn ghost small" type="button" id="shareAnalysis">Compartir resultado</button>
+          <button class="btn ghost small" type="button" id="reportAnalysis">Reportar oferta</button>
+        </div>
+      `;
+      lastAnalysis = {
+        id: Date.now(),
+        text: text.trim(),
+        score: result.score,
+        level: result.level,
+        signals: result.signals,
+        date: new Date().toLocaleString("es-PE")
+      };
+      qs("#saveAnalysis").addEventListener("click", saveLastAnalysis);
+      qs("#shareAnalysis").addEventListener("click", () => alert(`Enlace generado: fakejob://resultado/${lastAnalysis.id}`));
+      qs("#reportAnalysis").addEventListener("click", () => {
+        qs("#reportText").value = lastAnalysis.text;
+        location.hash = "#comunidad";
+      });
+    }
+
+    function saveLastAnalysis() {
+      if (!lastAnalysis) return;
+      const history = readJson(storageKey, []);
+      writeJson(storageKey, [lastAnalysis, ...history].slice(0, 20));
+      renderHistory();
+      alert("Analisis guardado en historial local.");
+    }
+
+    function renderHistory() {
+      const search = qs("#historySearch").value.toLowerCase();
+      const sort = qs("#historySort").value;
+      let history = readJson(storageKey, []);
+      if (search) {
+        history = history.filter(item => `${item.text} ${item.level}`.toLowerCase().includes(search));
+      }
+      if (sort === "risk") history.sort((a, b) => b.score - a.score);
+      if (sort === "label") history.sort((a, b) => a.level.localeCompare(b.level));
+      const list = qs("#historyList");
+      if (!history.length) {
+        list.innerHTML = `<div class="item"><strong>Sin analisis guardados</strong><p class="muted">Guarda un resultado desde la seccion Analizar para verlo aqui.</p></div>`;
+        return;
+      }
+      list.innerHTML = history.map(item => `
+        <article class="item">
+          <div class="item-head">
+            <div>
+              <span class="badge ${item.score >= 70 ? "high" : item.score >= 40 ? "mid" : "low"}">${item.level}: ${item.score}%</span>
+              <p style="margin:10px 0">${item.text.slice(0, 180)}${item.text.length > 180 ? "..." : ""}</p>
+              <p class="muted">${item.date} Â· SeÃ±ales: ${item.signals.join(", ") || "sin seÃ±ales crÃ­ticas"}</p>
+            </div>
+            <div class="actions" style="margin-top:0">
+              <button class="btn ghost small" type="button" onclick="showDetail(${item.id})">Ver detalle</button>
+              <button class="btn danger small" type="button" onclick="deleteItem(${item.id})">Eliminar</button>
+            </div>
+          </div>
