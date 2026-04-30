@@ -13,3 +13,4 @@ IHC y Tecnologias Moviles - UPC 202610
 2026-04-29 Jimena: Resolver calculo de offset en scroll highlight
 2026-04-29 Darnell: Agregar alt text a todas las imagenes
 2026-04-30 Mauricio: Ajustes de layout movil en todas las secciones
+2026-04-30 Jimena: Mejorar timing de mensajes de error en formulario
