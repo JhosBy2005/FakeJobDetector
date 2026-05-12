@@ -22,3 +22,4 @@ IHC y Tecnologias Moviles - UPC 202610
 2026-05-11 Santana: Validacion final pre-push e integridad de archivos
 2026-05-11 Darnell: Verificar IDs de secciones y anchors de navegacion
 2026-05-11 Mauricio: Verificacion final de contraste de color y accesibilidad
+2026-05-12 Darnell: Congelamiento de codigo pre-pausa y notas de revision
