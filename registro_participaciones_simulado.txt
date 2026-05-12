@@ -24,3 +24,4 @@ IHC y Tecnologias Moviles - UPC 202610
 2026-05-11 Mauricio: Verificacion final de contraste de color y accesibilidad
 2026-05-12 Darnell: Congelamiento de codigo pre-pausa y notas de revision
 2026-05-12 Mauricio: Correcciones de espaciado de ultimo momento antes de pausa
+2026-05-12 Jimena: Asegurar limpieza de event listeners en descarga
