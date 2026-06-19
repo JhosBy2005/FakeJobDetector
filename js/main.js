@@ -1,4 +1,4 @@
-﻿const qs = (selector) => document.querySelector(selector);
+const qs = (selector) => document.querySelector(selector);
     const storageKey = "fakejob-history";
     const reportsKey = "fakejob-reports";
     let lastAnalysis = null;
@@ -9,7 +9,7 @@
     function closeMenu() {
       mainMenu.classList.remove("open");
       menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Abrir menu");
+      menuToggle.setAttribute("aria-label", "Abrir menú");
       document.querySelectorAll(".dropdown").forEach(dropdown => {
         dropdown.classList.remove("open");
         dropdown.querySelector(".dropdown-button")?.setAttribute("aria-expanded", "false");
@@ -20,7 +20,7 @@
       const expanded = menuToggle.getAttribute("aria-expanded") === "true";
       mainMenu.classList.toggle("open", !expanded);
       menuToggle.setAttribute("aria-expanded", String(!expanded));
-      menuToggle.setAttribute("aria-label", expanded ? "Abrir menu" : "Cerrar menu");
+      menuToggle.setAttribute("aria-label", expanded ? "Abrir menú" : "Cerrar menú");
     });
 
     mainMenu.querySelectorAll("a").forEach(link => {
@@ -53,8 +53,8 @@
     });
 
     const riskyPatterns = [
-      { key: "pago previo", words: ["paga", "pago", "deposito", "transferencia", "separar tu vacante"], points: 22 },
-      { key: "salario irreal", words: ["s/500 diarios", "gana", "diarios", "dinero rapido", "ingresos inmediatos"], points: 18 },
+      { key: "pago previo", words: ["paga", "pago", "deposito", "depósito", "transferencia", "separar tu vacante"], points: 22 },
+      { key: "salario irreal", words: ["s/500 diarios", "gana", "diarios", "dinero rapido", "dinero rápido", "ingresos inmediatos"], points: 18 },
       { key: "urgencia artificial", words: ["urgente", "inmediato", "hoy mismo", "cupos limitados"], points: 14 },
       { key: "contacto informal", words: ["whatsapp", "telegram", "inbox"], points: 12 },
       { key: "datos personales", words: ["dni", "cuenta bancaria", "foto de documento", "datos personales"], points: 15 },
@@ -65,7 +65,7 @@
     const recommendations = [
       "No realices pagos para reservar vacantes o acceder a entrevistas.",
       "Valida la empresa por canales oficiales antes de enviar documentos.",
-      "Desconfia de promesas de ingresos altos con poca informacion.",
+      "Desconfía de promesas de ingresos altos con poca información.",
       "Evita abrir enlaces acortados o dominios que no pertenezcan a la empresa.",
       "Reporta la oferta si solicita dinero, DNI o cuenta bancaria antes de validar."
     ];
@@ -96,28 +96,28 @@
     function validateAnalysisInput(showMessage = false) {
       const value = qs("#offerText").value.trim();
       const button = qs("#analyzeButton");
-      let message = "Ingresa al menos 25 caracteres o una URL completa. El boton se activara cuando el contenido sea suficiente.";
+      let message = "Ingresa al menos 25 caracteres o una URL completa. El botón se activará cuando el contenido sea suficiente.";
       let valid = value.length >= 25;
       if (!value) {
         valid = false;
         message = "Ingresa el texto o enlace de una oferta para continuar.";
       } else if (isProbablyUrl(value) && !isValidUrl(value)) {
         valid = false;
-        message = "El enlace ingresado no parece valido. Revisa la URL o pega el texto completo de la oferta.";
+        message = "El enlace ingresado no parece válido. Revisa la URL o pega el texto completo de la oferta.";
       } else if (value.length > 0 && value.length < 25) {
         valid = false;
-        message = "La informacion es insuficiente. Agrega cargo, empresa, contacto, salario o enlace para analizar mejor.";
+        message = "La información es insuficiente. Agrega cargo, empresa, contacto, salario o enlace para analizar mejor.";
       }
       button.disabled = !valid;
       qs("#analysisHelp").textContent = message;
       if (!valid && showMessage) {
         qs("#analysisResult").innerHTML = `
-          <span class="badge mid">No se puede analizar aun</span>
+          <span class="badge mid">No se puede analizar aún</span>
           <div class="error-note">${message}</div>
           <ul class="help-list">
-            <li>Pega el texto completo de la oferta o una URL valida.</li>
+            <li>Pega el texto completo de la oferta o una URL válida.</li>
             <li>Incluye empresa, canal de contacto y condiciones ofrecidas.</li>
-            <li>Vuelve a intentar cuando el boton este activo.</li>
+            <li>Vuelve a intentar cuando el botón esté activo.</li>
           </ul>
         `;
       }
@@ -136,7 +136,7 @@
       });
       if (normalized.length < 40) {
         score += 8;
-        signals.push("informacion insuficiente");
+        signals.push("información insuficiente");
       }
       score = Math.min(score, 96);
       let level = score >= 70 ? "Riesgo alto" : score >= 40 ? "Riesgo medio" : "Riesgo bajo";
@@ -155,21 +155,21 @@
         ? "No recomendamos postular a esta oferta hasta verificar empresa, RUC y canal oficial."
         : result.cls === "mid"
           ? "Revisa los datos antes de postular y confirma la empresa por fuentes oficiales."
-          : "Puedes continuar con cautela, manteniendo buenas practicas de privacidad.";
+          : "Puedes continuar con cautela, manteniendo buenas prácticas de privacidad.";
       const signalChips = result.signals.length
         ? result.signals.map(signal => `<span class="chip danger">${signal}</span>`).join("")
-        : `<span class="chip safe">sin seÃ±ales crÃ­ticas</span>`;
+        : `<span class="chip safe">sin señales críticas</span>`;
       const recommended = recommendations.slice(0, result.score >= 70 ? 5 : 3)
         .map(item => `<li>${item}</li>`).join("");
       qs("#analysisResult").innerHTML = `
         <span class="badge ${result.cls}">${result.level}: ${result.score}%</span>
         <div class="risk-card ${result.cls}">
           <div class="risk-title">${symbol}<span>${result.level}</span></div>
-          <p><strong>Accion sugerida:</strong> ${actionMessage}</p>
-          <p class="muted">Este resultado usa etiqueta, texto, icono, borde y patron visual para no depender solo del color.</p>
+          <p><strong>Acción sugerida:</strong> ${actionMessage}</p>
+          <p class="muted">Este resultado usa etiqueta, texto, icono, borde y patrón visual para no depender solo del color.</p>
         </div>
         <div class="chips">${signalChips}</div>
-        <p><strong>Explicacion:</strong> El sistema encontro ${result.signals.length || "pocas"} seÃ±ales de riesgo asociadas a fraude laboral, phishing o manipulacion.</p>
+        <p><strong>Explicación:</strong> El sistema encontró ${result.signals.length || "pocas"} señales de riesgo asociadas a fraude laboral, phishing o manipulación.</p>
         <ul>${recommended}</ul>
         <div class="actions">
           <button class="btn secondary small" type="button" id="saveAnalysis">Guardar historial</button>
@@ -198,7 +198,7 @@
       const history = readJson(storageKey, []);
       writeJson(storageKey, [lastAnalysis, ...history].slice(0, 20));
       renderHistory();
-      alert("Analisis guardado en historial local.");
+      alert("Análisis guardado en historial local.");
     }
 
     function renderHistory() {
@@ -212,7 +212,7 @@
       if (sort === "label") history.sort((a, b) => a.level.localeCompare(b.level));
       const list = qs("#historyList");
       if (!history.length) {
-        list.innerHTML = `<div class="item"><strong>Sin analisis guardados</strong><p class="muted">Guarda un resultado desde la seccion Analizar para verlo aqui.</p></div>`;
+        list.innerHTML = `<div class="item"><strong>Sin análisis guardados</strong><p class="muted">Guarda un resultado desde la sección Analizar para verlo aquí.</p></div>`;
         return;
       }
       list.innerHTML = history.map(item => `
@@ -221,7 +221,7 @@
             <div>
               <span class="badge ${item.score >= 70 ? "high" : item.score >= 40 ? "mid" : "low"}">${item.level}: ${item.score}%</span>
               <p style="margin:10px 0">${item.text.slice(0, 180)}${item.text.length > 180 ? "..." : ""}</p>
-              <p class="muted">${item.date} Â· SeÃ±ales: ${item.signals.join(", ") || "sin seÃ±ales crÃ­ticas"}</p>
+              <p class="muted">${item.date} · Señales: ${item.signals.join(", ") || "sin señales críticas"}</p>
             </div>
             <div class="actions" style="margin-top:0">
               <button class="btn ghost small" type="button" onclick="showDetail(${item.id})">Ver detalle</button>
@@ -235,7 +235,7 @@
     window.showDetail = function(id) {
       const item = readJson(storageKey, []).find(entry => entry.id === id);
       if (!item) return;
-      alert(`Detalle del analisis\n\nRiesgo: ${item.level} (${item.score}%)\nSeÃ±ales: ${item.signals.join(", ") || "sin seÃ±ales"}\n\n${item.text}`);
+      alert(`Detalle del análisis\n\nRiesgo: ${item.level} (${item.score}%)\nSeñales: ${item.signals.join(", ") || "sin señales"}\n\n${item.text}`);
     };
 
     window.deleteItem = function(id) {
@@ -245,15 +245,15 @@
 
     function renderReports() {
       const defaults = [
-        { id: 1, company: "Asistente remoto", platform: "WhatsApp", type: "Solicita pago previo", text: "Oferta por WhatsApp solicita S/50 para separar entrevista.", votes: 12, status: "En revision comunitaria" },
+        { id: 1, company: "Asistente remoto", platform: "WhatsApp", type: "Solicita pago previo", text: "Oferta por WhatsApp solicita S/50 para separar entrevista.", votes: 12, status: "En revisión comunitaria" },
         { id: 2, company: "Reclutador no identificado", platform: "Correo", type: "Promesa de ingresos irreales", text: "Correo no corporativo promete trabajo remoto con pago diario.", votes: 7, status: "Publicado como alerta" }
       ];
       const reports = readJson(reportsKey, defaults);
       qs("#reportList").innerHTML = reports.map(report => `
         <article class="item">
-          <span class="badge mid">${report.status || "En revision comunitaria"}</span>
+          <span class="badge mid">${report.status || "En revisión comunitaria"}</span>
           <h3 style="margin-top:10px">${report.company || "Oferta reportada"}</h3>
-          <p class="muted">Plataforma: ${report.platform || "No indicada"} Â· Tipo: ${report.type || "No indicado"}</p>
+          <p class="muted">Plataforma: ${report.platform || "No indicada"} · Tipo: ${report.type || "No indicado"}</p>
           <p><strong>Vista previa del reporte:</strong></p>
           <p>${report.text}</p>
           <p class="muted">Validaciones comunitarias: ${report.votes}</p>
@@ -281,7 +281,7 @@
     });
 
     qs("#exampleBtn").addEventListener("click", () => {
-      qs("#offerText").value = "Trabajo remoto inmediato. Gana S/500 diarios, escribenos por WhatsApp y paga S/50 para separar tu vacante. Entra a http://bit.ly/vacante-rapida y envia tu DNI.";
+      qs("#offerText").value = "Trabajo remoto inmediato. Gana S/500 diarios, escríbenos por WhatsApp y paga S/50 para separar tu vacante. Entra a http://bit.ly/vacante-rapida y envía tu DNI.";
       validateAnalysisInput();
     });
     qs("#offerText").addEventListener("input", () => validateAnalysisInput());
@@ -297,21 +297,21 @@
       const safeUrl = /^https:\/\//i.test(website) && !/(bit\.ly|tinyurl|\.ru|\.click)/i.test(website);
       const score = [validRuc, hasCorporateMail, safeUrl].filter(Boolean).length;
       const cls = score >= 3 ? "low" : score === 2 ? "mid" : "high";
-      const label = score >= 3 ? "Verificacion confiable" : score === 2 ? "Requiere revision" : "Alerta de suplantacion";
+      const label = score >= 3 ? "Verificación confiable" : score === 2 ? "Requiere revisión" : "Alerta de suplantación";
       qs("#verifyResult").innerHTML = `
         <span class="badge ${cls}">${label}</span>
         <div class="chips">
-          <span class="chip ${validRuc ? "safe" : "danger"}">RUC ${validRuc ? "valido" : "incompleto"}</span>
+          <span class="chip ${validRuc ? "safe" : "danger"}">RUC ${validRuc ? "válido" : "incompleto"}</span>
           <span class="chip ${hasCorporateMail ? "safe" : "danger"}">Correo ${hasCorporateMail ? "corporativo" : "no corporativo"}</span>
           <span class="chip ${safeUrl ? "safe" : "danger"}">Sitio ${safeUrl ? "seguro" : "sospechoso"}</span>
         </div>
-        <p><strong>${company}</strong> Â· Reputacion: ${score >= 2 ? "positiva con referencias visibles" : "sin referencias suficientes"}.</p>
-        <p class="muted">Redes sociales: LinkedIn y sitio oficial ${score >= 2 ? "encontrados" : "no confirmados"}. Ubicacion registrada: Lima, Peru ${validRuc ? "(referencial)" : "(pendiente)"}.</p>
+        <p><strong>${company}</strong> · Reputación: ${score >= 2 ? "positiva con referencias visibles" : "sin referencias suficientes"}.</p>
+        <p class="muted">Redes sociales: LinkedIn y sitio oficial ${score >= 2 ? "encontrados" : "no confirmados"}. Ubicación registrada: Lima, Perú ${validRuc ? "(referencial)" : "(pendiente)"}.</p>
         <div class="source-list">
-          <div class="source-row"><strong>Busqueda interna</strong><span>${company !== "Empresa no indicada" ? "Coincidencia encontrada en la base de empresas." : "No se ingreso nombre de empresa."}</span></div>
-          <div class="source-row"><strong>Validacion formal</strong><span>${validRuc ? "RUC con formato valido para consulta oficial." : "No se puede afirmar verificacion formal sin RUC completo."}</span></div>
-          <div class="source-row"><strong>Dominio/correo</strong><span>${hasCorporateMail && safeUrl ? "Correo y sitio usan dominio corporativo consistente." : "Correo o sitio requieren revision manual."}</span></div>
-          <div class="source-row"><strong>Comunidad</strong><span>${score >= 2 ? "Sin reportes recientes de alto riesgo." : "Hay riesgo por informacion insuficiente o no confirmada."}</span></div>
+          <div class="source-row"><strong>Búsqueda interna</strong><span>${company !== "Empresa no indicada" ? "Coincidencia encontrada en la base de empresas." : "No se ingresó nombre de empresa."}</span></div>
+          <div class="source-row"><strong>Validación formal</strong><span>${validRuc ? "RUC con formato válido para consulta oficial." : "No se puede afirmar verificación formal sin RUC completo."}</span></div>
+          <div class="source-row"><strong>Dominio/correo</strong><span>${hasCorporateMail && safeUrl ? "Correo y sitio usan dominio corporativo consistente." : "Correo o sitio requieren revisión manual."}</span></div>
+          <div class="source-row"><strong>Comunidad</strong><span>${score >= 2 ? "Sin reportes recientes de alto riesgo." : "Hay riesgo por información insuficiente o no confirmada."}</span></div>
         </div>
       `;
     });
@@ -331,7 +331,7 @@
       const platform = qs("#reportPlatform").value;
       const type = qs("#reportType").value;
       const reports = readJson(reportsKey, []);
-      const newReport = { id: Date.now(), company, platform, type, text, votes: 1, status: "En revision comunitaria" };
+      const newReport = { id: Date.now(), company, platform, type, text, votes: 1, status: "En revisión comunitaria" };
       reports.unshift(newReport);
       writeJson(reportsKey, reports);
       qs("#reportText").value = "";
@@ -341,8 +341,8 @@
         <div class="risk-card low">
           <div class="risk-title"><span aria-hidden="true">OK</span><span>Vista previa del reporte</span></div>
           <p><strong>Oferta reportada:</strong> ${newReport.company}</p>
-          <p><strong>Plataforma:</strong> ${newReport.platform} Â· <strong>Tipo de fraude:</strong> ${newReport.type}</p>
-          <p><strong>Estado:</strong> ${newReport.status}. Se publicara como alerta cuando reciba validacion comunitaria.</p>
+          <p><strong>Plataforma:</strong> ${newReport.platform} · <strong>Tipo de fraude:</strong> ${newReport.type}</p>
+          <p><strong>Estado:</strong> ${newReport.status}. Se publicará como alerta cuando reciba validación comunitaria.</p>
           <p class="muted">${newReport.text}</p>
         </div>
       `;
@@ -352,7 +352,7 @@
     ["registerBtn", "loginBtn", "recoverBtn", "profileBtn", "prefsBtn", "logoutBtn"].forEach(id => {
       qs(`#${id}`).addEventListener("click", event => {
         const action = event.target.textContent;
-        qs("#accountResult").innerHTML = `<span class="badge low">${action} completado</span><p class="muted" style="margin:12px 0 0">Accion completada sin solicitar permisos adicionales.</p>`;
+        qs("#accountResult").innerHTML = `<span class="badge low">${action} completado</span><p class="muted" style="margin:12px 0 0">Acción completada sin solicitar permisos adicionales.</p>`;
       });
     });
 
@@ -364,12 +364,12 @@
 
     qs("#feedbackForm").addEventListener("submit", event => {
       event.preventDefault();
-      qs("#feedbackResult").innerHTML = `<span class="badge low">Feedback guardado</span><p class="muted" style="margin:12px 0 0">Gracias. Tu comentario ayudara a mejorar la experiencia.</p>`;
+      qs("#feedbackResult").innerHTML = `<span class="badge low">Feedback guardado</span><p class="muted" style="margin:12px 0 0">Gracias. Tu comentario ayudará a mejorar la experiencia.</p>`;
       qs("#feedbackText").value = "";
     });
 
     qs("#maliciousBtn").addEventListener("click", () => {
-      qs("#feedbackResult").innerHTML = `<span class="badge high">Denuncia registrada</span><p class="muted" style="margin:12px 0 0">Se registro una denuncia demo para revision de la comunidad.</p>`;
+      qs("#feedbackResult").innerHTML = `<span class="badge high">Denuncia registrada</span><p class="muted" style="margin:12px 0 0">Se registró una denuncia demo para revisión de la comunidad.</p>`;
     });
 
     renderHistory();
