@@ -1,39 +1,87 @@
-# FakeJobDetector
+# FakeJob Detector
 
-## FakeJob Detector - Detección de Ofertas Laborales Falsas
+Landing page del proyecto FakeJob Detector, una solución digital orientada a prevenir fraudes laborales mediante el análisis de ofertas sospechosas, la verificación de empresas y la educación preventiva para usuarios que buscan empleo.
 
-## Descripción
+## Información del proyecto
 
-FakeJob Detector es una plataforma web desarrollada para ayudar a los usuarios a identificar ofertas laborales sospechosas o fraudulentas antes de postular. La herramienta analiza información como el texto de la oferta, enlaces, datos de la empresa y señales frecuentes de fraude, mostrando un nivel de riesgo claro junto con recomendaciones preventivas.
-
-El objetivo principal del proyecto es reducir el riesgo de estafas laborales digitales, brindando una experiencia simple, informativa y accesible para personas que buscan empleo en plataformas digitales.
+FakeJob Detector ayuda a identificar señales de riesgo antes de postular a una oferta laboral. El avance de implementación está construido solo con HTML, CSS y JavaScript, siguiendo la estructura solicitada para el challenge de participación del curso.
 
 ## Autores
 
-Team Coworkers
+Team Coworkers:
 
-## Segmento Objetivo
+- Darnell Cuba
+- Mauricio Valverde
+- Jimena Curi
+- José Martinez
+- José Santana
 
-FakeJob Detector está dirigido a estudiantes, recién egresados, trabajadores remotos, freelancers y personas en búsqueda activa de empleo que necesitan verificar la confiabilidad de ofertas laborales antes de compartir datos personales o aceptar una propuesta.
+## Segmentos objetivo
 
-## Características Principales
+- Estudiantes y recién egresados que buscan su primer empleo.
+- Personas en búsqueda activa de empleo por plataformas digitales.
+- Trabajadores remotos expuestos a ofertas por redes sociales o mensajería.
+- Freelancers que necesitan verificar clientes, empresas y condiciones de contratación.
 
-- Análisis de ofertas laborales: Permite revisar textos o enlaces de ofertas para detectar posibles señales de fraude.
-- Verificación de empresas: Ayuda a validar datos importantes antes de postular a una vacante.
-- Nivel de riesgo claro: Muestra resultados comprensibles para que el usuario tome mejores decisiones.
-- Historial de análisis: Guarda revisiones realizadas para consultarlas posteriormente.
-- Comunidad de reportes: Permite visualizar y registrar alertas sobre ofertas sospechosas.
-- Recursos preventivos: Brinda información educativa para reconocer patrones comunes de fraude laboral.
-- Interfaz intuitiva y responsiva: Diseño adaptado para facilitar la navegación desde distintos dispositivos.
+## Características principales
 
-## Tecnologías Utilizadas
+- Análisis de ofertas laborales para detectar pagos previos, urgencia artificial, phishing, salarios irreales y solicitud de datos sensibles.
+- Verificación de empresas mediante nombre, RUC, correo, sitio web y señales comunitarias.
+- Resultado de riesgo con porcentaje, nivel, explicación y recomendaciones preventivas.
+- Historial local de análisis para revisar, buscar, ordenar y eliminar evaluaciones previas.
+- Comunidad de reportes para registrar y validar alertas sobre posibles fraudes.
+- Recursos educativos para reconocer patrones comunes de estafa laboral.
+- Interfaz responsiva con navegación, formularios, modo oscuro y estados interactivos.
 
-- HTML
-- CSS
+## Estructura del proyecto
+
+```text
+FakeJobDetector/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── assets/
+│       ├── README.md
+│       ├── images/
+│       ├── scripts/
+│       │   └── main.js
+│       └── styles/
+│           └── styles.css
+├── api/
+├── docs/
+├── participacion/
+├── README.md
+└── CONTRIBUCIONES_REALES.md
+```
+
+## Tecnologías utilizadas
+
+- HTML5
+- CSS3
 - JavaScript
+- Google Fonts
+- Git y GitHub con flujo de trabajo GitFlow
 
-## Propósito del Proyecto
+## GitFlow
 
-Este proyecto busca promover la prevención social frente a fraudes laborales digitales, ofreciendo una solución práctica para analizar, verificar y reportar ofertas sospechosas de manera rápida y sencilla.
+El proyecto mantiene `main` como rama estable y `develop` como rama de integración. Las nuevas funcionalidades deben crearse desde `develop` usando la convención:
 
-¿Quieres contribuir o mejorar la plataforma? ¡Tu participación es bienvenida!
+```text
+feature/nombre-de-la-funcionalidad
+```
+
+Ejemplo usado para este avance:
+
+```text
+feature/landing-page-structure
+```
+
+## Cómo ver el avance
+
+Abre el archivo:
+
+```text
+public/index.html
+```
+
+También puedes servir la carpeta `public` con cualquier servidor estático local.
