@@ -70,18 +70,3 @@ El proyecto mantiene `main` como rama estable y `develop` como rama de integraci
 feature/nombre-de-la-funcionalidad
 ```
 
-Ejemplo usado para este avance:
-
-```text
-feature/landing-page-structure
-```
-
-## Cómo ver el avance
-
-Abre el archivo:
-
-```text
-public/index.html
-```
-
-También puedes servir la carpeta `public` con cualquier servidor estático local.
